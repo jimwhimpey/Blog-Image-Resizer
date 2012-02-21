@@ -18,6 +18,11 @@ else
 	title = Time.now.to_i.to_s
 end
 
+# Check if there's a class
+if (ARGV[2] != nil) then
+	class_name = ARGV[2]
+end
+
 # Filenames and paths
 large_name = title + "-large." + image[:format].downcase
 small_name = title + "-small." + image[:format].downcase
@@ -50,7 +55,11 @@ File.delete(large_path)
 File.delete(small_path)
 
 # Output the markdown and copy it to the clipboard
-html = "<a href='" + $http_path + "/" + large_name + "'><img src='" + $http_path + "/" + small_name + "' alt='" + title.gsub("\-", " ") + "' /></a>"
+html = "<a href='" + $http_path + "/" + large_name + "'><img src='" + $http_path + "/" + small_name + "' alt='" + title.gsub("\-", " ") + "' "
+if (class_name != nil) then
+	html += "class='" + class_name + "' "
+end
+html += "/></a>"
 IO.popen('pbcopy', 'r+') { |clipboard| clipboard.puts html }
 print "========================================================\n"
 print "The following HTML has been copied to your clipboard\n\n"
