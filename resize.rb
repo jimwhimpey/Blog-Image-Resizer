@@ -1,18 +1,11 @@
 require 'net/ftp'
 require 'mini_magick'
-require './ftp.rb'
-
-# Define sizes
-small = "500"
-large = "1200"
-
-# Where images are stored before they're uploaded
-tmp_dir = "/Users/jimwhimpey/Desktop/"
+require './config.rb'
 
 # Grab the image
 if (ARGV[0] != nil) then
-	path = ARGV[0]
-	image = MiniMagick::Image.open(path)
+	local_path = ARGV[0]
+	image = MiniMagick::Image.open(local_path)
 else
 	p "You must pass in an image path"
 	return
@@ -28,18 +21,18 @@ end
 # Filenames and paths
 large_name = title + "-large." + image[:format].downcase
 small_name = title + "-small." + image[:format].downcase
-large_path = tmp_dir + large_name
-small_path = tmp_dir + small_name
+large_path = $tmp_dir + large_name
+small_path = $tmp_dir + small_name
 
 # Do the large resizing (if it's wider than the large)
-if (image[:width] > large.to_i) then
-	image.resize(large)
+if (image[:width] > $size_large.to_i) then
+	image.resize($size_large)
 end
 image.write(large_path)
 
 # Do the small resizing (if it's wider than the small)
-if (image[:width] > small.to_i) then
-	image.resize(small)
+if (image[:width] > $size_small.to_i) then
+	image.resize($size_small)
 end
 image.write(small_path)
 
