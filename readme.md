@@ -12,10 +12,6 @@ Handles any image type ImageMagick will take. Smart enough to not resize images 
 4. Wait for the files to upload.
 5. Markdown is now copied to your pasteboard. 
 
-## Example Output
-
-`[![1329819405](http://static.jimwhimpey.com/blog/1329819405-small.png)](http://static.jimwhimpey.com/blog/1329819405-large.png)`
-
 ## Requirments
 
 * [ImageMagick](http://www.imagemagick.org/script/index.php)
