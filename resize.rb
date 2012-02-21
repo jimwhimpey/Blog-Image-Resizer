@@ -6,8 +6,8 @@ require './ftp.rb'
 small = "500"
 large = "1200"
 
-# Define output directory
-output_dir = "/Users/jimwhimpey/Desktop/"
+# Where images are stored before they're uploaded
+tmp_dir = "/Users/jimwhimpey/Desktop/"
 
 # Grab the image
 if (ARGV[0] != nil) then
@@ -15,7 +15,7 @@ if (ARGV[0] != nil) then
 	image = MiniMagick::Image.open(path)
 else
 	p "You must pass in an image path"
-
+	return
 end
 
 # Check if there's an image title option
@@ -25,23 +25,41 @@ else
 	title = Time.now.to_i.to_s
 end
 
+# Filenames and paths
+large_name = title + "-large." + image[:format].downcase
+small_name = title + "-small." + image[:format].downcase
+large_path = tmp_dir + large_name
+small_path = tmp_dir + small_name
+
 # Do the large resizing (if it's wider than the large)
 if (image[:width] > large.to_i) then
 	image.resize(large)
 end
-image.write(output_dir + title + "-large." + image[:format].downcase)
+image.write(large_path)
 
 # Do the small resizing (if it's wider than the small)
 if (image[:width] > small.to_i) then
 	image.resize(small)
 end
-image.write(output_dir + title + "-small." + image[:format].downcase)
+image.write(small_path)
 
 # FTP Upload the file
 ftp = Net::FTP.new
 ftp.connect($ftp_host)
 ftp.login($ftp_username,$ftp_password)
 ftp.chdir($ftp_path)
-ftp.putbinaryfile(output_dir + title + "-large." + image[:format].downcase, title + "-large." + image[:format].downcase)
-ftp.putbinaryfile(output_dir + title + "-small." + image[:format].downcase, title + "-small." + image[:format].downcase)
+ftp.putbinaryfile(large_path, large_name)
+ftp.putbinaryfile(small_path, small_name)
 ftp.quit
+
+# Delete the temporary files
+File.delete(large_path)
+File.delete(small_path)
+
+# Output the markdown and copy it to the clipboard
+markdown = "[![" + title + "](" + $http_path + "/" + small_name + ")](" + $http_path + "/" + large_name + ")"
+IO.popen('pbcopy', 'r+') { |clipboard| clipboard.puts markdown }
+print "========================================================\n"
+print "The following markdown has been copied to your clipboard\n\n"
+print markdown + "\n\n"
+print "========================================================\n"
