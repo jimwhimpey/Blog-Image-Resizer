@@ -2,6 +2,8 @@
 
 Takes a local image path and (optionally a title), creates a small version, creates a larger version, uploads them via FTP, returns markdown of the little smaller linking to the larger image, automatically copies it to your pasteboard.
 
+Handles any image type ImageMagick will take. Smart enough to not resize images *up* if they're not big enough but that's where the smart ends.
+
 ## Usage
 
 1. Download this thing.
@@ -10,7 +12,7 @@ Takes a local image path and (optionally a title), creates a small version, crea
 4. Wait for the files to upload.
 5. Markdown is now copied to your pasteboard. 
 
-## Output
+## Example Output
 
 `[![1329819405](http://static.jimwhimpey.com/blog/1329819405-small.png)](http://static.jimwhimpey.com/blog/1329819405-large.png)`
 
