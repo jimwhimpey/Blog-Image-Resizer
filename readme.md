@@ -2,9 +2,7 @@
 
 Takes a local image path and (optionally a title), creates a small version, creates a larger version, uploads them via FTP, returns markdown of the little smaller linking to the larger image, automatically copies it to your pasteboard.
 
-Handles any image type ImageMagick will take. Smart enough to not resize images *up* if they're not big enough but that's where the smart ends.
-
-This is mostly just a little tool for me to fill a gap [I see](http://valhallaisland.com/blog/2012/octopress/) in the otherwise brilliant [Octopress](http://octopress.org/). I hope someone else can also find it useful in some capacity.
+Handles any image type ImageMagick will take. Smart enough to not resize images *up* if they're not big enough but that's where the smart ends. This is a little tool for me to fill a gap [I see](http://valhallaisland.com/blog/2012/octopress/) in the otherwise brilliant [Octopress](http://octopress.org/) blogging software. I hope someone else can also find it useful in some capacity.
 
 ## Usage
 
