@@ -50,9 +50,9 @@ File.delete(large_path)
 File.delete(small_path)
 
 # Output the markdown and copy it to the clipboard
-markdown = "[![" + title + "](" + $http_path + "/" + small_name + ")](" + $http_path + "/" + large_name + ")"
-IO.popen('pbcopy', 'r+') { |clipboard| clipboard.puts markdown }
+html = "<a href='" + $http_path + "/" + large_name + "'><img src='" + $http_path + "/" + small_name + "' alt='" + title.gsub("\-", " ") + "' /></a>"
+IO.popen('pbcopy', 'r+') { |clipboard| clipboard.puts html }
 print "========================================================\n"
-print "The following markdown has been copied to your clipboard\n\n"
-print markdown + "\n\n"
+print "The following HTML has been copied to your clipboard\n\n"
+print html + "\n\n"
 print "========================================================\n"
