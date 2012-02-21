@@ -10,7 +10,7 @@ Handles any image type ImageMagick will take. Smart enough to not resize images 
 2. Modify the config and rename it `config.rb`
 3. Run `ruby resize.rb /path/to/image.png "optional title of image" "optional-class"` (remember that you can drag and drop files onto the command line to paste in the path).
 4. Wait for the files to upload.
-5. Markdown is now copied to your pasteboard. 
+5. Output HTML is now copied to your pasteboard. 
 
 ## Requirments
 
