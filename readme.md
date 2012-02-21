@@ -4,6 +4,8 @@ Takes a local image path and (optionally a title), creates a small version, crea
 
 Handles any image type ImageMagick will take. Smart enough to not resize images *up* if they're not big enough but that's where the smart ends.
 
+This is mostly just a little tool for me to fill a gap [I see](http://valhallaisland.com/blog/2012/octopress/) in the otherwise brilliant [Octopress](http://octopress.org/). I hope someone else can also find it useful in some capacity.
+
 ## Usage
 
 1. Download this thing.
