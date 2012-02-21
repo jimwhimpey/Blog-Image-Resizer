@@ -1,5 +1,5 @@
 # FTP information for the uploads
-host = "example.com"
-username = "example"
-password = "example"
-path = "/example/example" # http://example.com/example/example
+$ftp_host = "example.com"
+$ftp_username = "example"
+$ftp_password = "example"
+$ftp_path = "/example/example" # http://example.com/example/example

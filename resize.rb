@@ -1,3 +1,4 @@
+require 'net/ftp'
 require 'mini_magick'
 require './ftp.rb'
 
@@ -14,6 +15,7 @@ if (ARGV[0] != nil) then
 	image = MiniMagick::Image.open(path)
 else
 	p "You must pass in an image path"
+
 end
 
 # Check if there's an image title option
@@ -34,3 +36,12 @@ if (image[:width] > small.to_i) then
 	image.resize(small)
 end
 image.write(output_dir + title + "-small." + image[:format].downcase)
+
+# FTP Upload the file
+ftp = Net::FTP.new
+ftp.connect($ftp_host)
+ftp.login($ftp_username,$ftp_password)
+ftp.chdir($ftp_path)
+ftp.putbinaryfile(output_dir + title + "-large." + image[:format].downcase, title + "-large." + image[:format].downcase)
+ftp.putbinaryfile(output_dir + title + "-small." + image[:format].downcase, title + "-small." + image[:format].downcase)
+ftp.quit
